@@ -87,7 +87,7 @@ class QuizFakeData {
                     "We can use the Android emulator, physical android phone, or third-party emulator as a target device to execute and test our Android application.",
                     "abc",
                     "",
-                    mutableListOf("Third-party emulators","Emulator included in Android SDK","Physical android phone","")
+                    mutableListOf("Third-party emulators","Emulator included in Android SDK","Physical android phone")
                 ),
                 Quiz(
                     10,

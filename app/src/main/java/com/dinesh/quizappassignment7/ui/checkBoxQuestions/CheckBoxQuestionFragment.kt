@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.dinesh.quizappassignment7.R
 import com.dinesh.quizappassignment7.data.Quiz
 import com.google.gson.Gson
@@ -28,6 +29,11 @@ class CheckBoxQuestionFragment : Fragment(R.layout.fragment_check_box_question) 
     private fun initSetup(view: View) {
         val questionTV = view.findViewById<TextView>(R.id.questionTextView)
         questionTV.text = quiz.question
+
+        //initializing recycler view
+        val recyclerView = view.findViewById<RecyclerView>(R.id.optionsRecyclerView)
+        val adapter = CBQuestionAdapter(quiz.options)
+        recyclerView.adapter = adapter
     }
 
     companion object {

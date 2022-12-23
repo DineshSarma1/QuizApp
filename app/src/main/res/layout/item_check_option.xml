@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <CheckBox
-        android:id="@+id/optionRB"
+        android:id="@+id/optionCB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Option"

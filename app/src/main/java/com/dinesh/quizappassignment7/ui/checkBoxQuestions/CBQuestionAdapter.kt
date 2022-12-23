@@ -3,6 +3,7 @@ package com.dinesh.quizappassignment7.ui.checkBoxQuestions
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.dinesh.quizappassignment7.R
@@ -12,14 +13,14 @@ class CBQuestionAdapter(
 ) : RecyclerView.Adapter<CBQuestionAdapter.CBQuestionViewHolder>(){
 
     inner class CBQuestionViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        private val optionRB: RadioButton = view.findViewById(R.id.optionRB)
+        private val optionCB: CheckBox = view.findViewById(R.id.optionCB)
         fun bind(option: String) {
-            optionRB.text = option
+            optionCB.text = option
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CBQuestionViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_radio_option, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_check_option, parent, false)
         return CBQuestionViewHolder(view)
     }
 
