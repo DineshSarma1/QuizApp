@@ -15,19 +15,22 @@ class ViewPagerAdapter(
     private val questionList: MutableList<Quiz>
 ) : FragmentStateAdapter(fragment) {
 
-    override fun getItemCount(): Int = questionList.size
+    override fun getItemCount(): Int = questionList.size + 1
 
     override fun createFragment(position: Int): Fragment {
+        val fragment: Fragment = if (position == 15) {
+            ResultFragment.newInstance()
+        }else {
+            val quiz = questionList[position]
+            //creating fragment object according to position
+            when(quiz.questionType) {
 
-        val quiz = questionList[position]
-        //creating fragment object according to position
-        val fragment: Fragment = when(quiz.questionType) {
+                IS_CHECK_BOX -> CheckBoxQuestionFragment.newInstance(Gson().toJson(quiz))
 
-            IS_CHECK_BOX -> CheckBoxQuestionFragment.newInstance(Gson().toJson(quiz))
+                IS_RADIO_BUTTON -> RadioButtonQuestionFragment.newInstance(Gson().toJson(quiz))
 
-            IS_RADIO_BUTTON -> RadioButtonQuestionFragment.newInstance(Gson().toJson(quiz))
-
-            else -> ResultFragment.newInstance()
+                else -> ResultFragment.newInstance()
+            }
         }
 
         return fragment

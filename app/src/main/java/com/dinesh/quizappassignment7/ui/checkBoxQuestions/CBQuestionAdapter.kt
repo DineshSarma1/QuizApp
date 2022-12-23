@@ -7,13 +7,15 @@ import android.widget.CheckBox
 import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.dinesh.quizappassignment7.R
+import com.dinesh.quizappassignment7.util.CheckClickInterface
 
 class CBQuestionAdapter(
-    private val options: MutableList<String> = mutableListOf()
+    private val options: MutableList<String> = mutableListOf(),
+    private val listener: CheckClickInterface
 ) : RecyclerView.Adapter<CBQuestionAdapter.CBQuestionViewHolder>(){
 
     inner class CBQuestionViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        private val optionCB: CheckBox = view.findViewById(R.id.optionCB)
+        val optionCB: CheckBox = view.findViewById(R.id.optionCB)
         fun bind(option: String) {
             optionCB.text = option
         }
@@ -26,6 +28,13 @@ class CBQuestionAdapter(
 
     override fun onBindViewHolder(holder: CBQuestionViewHolder, position: Int) {
         holder.bind(options[position])
+        holder.optionCB.setOnClickListener {
+            if (holder.optionCB.isChecked) {
+                listener.onCheckBoxChecked(position)
+            }else {
+                listener.onCheckBoxUnChecked(position)
+            }
+        }
     }
 
     override fun getItemCount(): Int = options.size
