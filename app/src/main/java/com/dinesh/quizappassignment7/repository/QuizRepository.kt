@@ -1,8 +1,6 @@
-package com.dinesh.quizappassignment7.data
+package com.dinesh.quizappassignment7.repository
 
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import com.dinesh.quizappassignment7.data.Quiz
 
 interface QuizRepository {
     suspend fun insertQuizQuestions(quizList : MutableList<Quiz>)

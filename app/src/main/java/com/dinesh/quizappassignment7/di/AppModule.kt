@@ -3,8 +3,8 @@ package com.dinesh.quizappassignment7.di
 import android.app.Application
 import androidx.room.Room
 import com.dinesh.quizappassignment7.constants.Constant.DB_NAME
-import com.dinesh.quizappassignment7.data.QuizRepository
-import com.dinesh.quizappassignment7.data.QuizRepositoryImpl
+import com.dinesh.quizappassignment7.repository.QuizRepository
+import com.dinesh.quizappassignment7.repository.QuizRepositoryImpl
 import com.dinesh.quizappassignment7.database.QuizDatabase
 import dagger.Module
 import dagger.Provides

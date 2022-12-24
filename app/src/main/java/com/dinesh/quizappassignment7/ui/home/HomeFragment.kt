@@ -3,21 +3,15 @@ package com.dinesh.quizappassignment7.ui.home
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.View.OnClickListener
-import android.widget.Button
-import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager2.widget.ViewPager2
 import com.dinesh.quizappassignment7.R
-import com.dinesh.quizappassignment7.constants.Constant
-import com.dinesh.quizappassignment7.data.Quiz
 import com.dinesh.quizappassignment7.data.QuizFakeData
 import com.dinesh.quizappassignment7.databinding.FragmentHomeBinding
+import com.dinesh.quizappassignment7.ui.QuizViewModel
 import com.dinesh.quizappassignment7.ui.SplashActivity
-import com.dinesh.quizappassignment7.ui.result.ResultFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,7 +20,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), OnClickListener{
     private lateinit var _context: Context
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModel: QuizViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,7 +30,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
-        viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[QuizViewModel::class.java]
 
         initialSetup()
 
@@ -57,12 +51,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), OnClickListener{
     override fun onClick(v: View?) {
         when(v!!.id) {
             R.id.next_button -> {
+
+                binding.viewPager.setCurrentItem(binding.viewPager.currentItem + 1, true)
+
                 //Result Fragment
-                if (binding.viewPager.currentItem == 14) {
+                if (binding.viewPager.currentItem == 15) {
                     binding.buttonsLL.visibility = View.GONE
                     binding.viewPager.isUserInputEnabled = false
                 }
-                binding.viewPager.setCurrentItem(binding.viewPager.currentItem + 1, true)
             }
 
             R.id.home_button -> {

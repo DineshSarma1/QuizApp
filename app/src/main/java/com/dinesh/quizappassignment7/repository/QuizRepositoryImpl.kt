@@ -1,7 +1,7 @@
-package com.dinesh.quizappassignment7.data
+package com.dinesh.quizappassignment7.repository
 
-import android.content.Context
-import com.dinesh.quizappassignment7.database.QuizDB
+import com.dinesh.quizappassignment7.data.Quiz
+import com.dinesh.quizappassignment7.data.QuizDAO
 import com.dinesh.quizappassignment7.database.QuizDatabase
 import javax.inject.Inject
 

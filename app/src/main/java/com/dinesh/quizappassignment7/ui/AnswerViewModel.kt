@@ -1,24 +1,24 @@
-package com.dinesh.quizappassignment7.ui.home
+package com.dinesh.quizappassignment7.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dinesh.quizappassignment7.data.Quiz
-import com.dinesh.quizappassignment7.data.QuizRepository
-import com.dinesh.quizappassignment7.data.QuizRepositoryImpl
+import com.dinesh.quizappassignment7.repository.QuizRepository
+import com.dinesh.quizappassignment7.repository.QuizRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-    private val repository: QuizRepository
+class AnswerViewModel @Inject constructor(
+    private val repository: QuizRepositoryImpl
 ) : ViewModel(){
 
     private val _data: MutableLiveData<List<Quiz>> = MutableLiveData()
-    val data: LiveData<List<Quiz>> get() = _data
+    val data: LiveData<List<Quiz>> = _data
 
     init {
         loadData()
@@ -35,5 +35,4 @@ class HomeViewModel @Inject constructor(
             _data.postValue(newList)
         }
     }
-
 }

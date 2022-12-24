@@ -1,13 +1,14 @@
 package com.dinesh.quizappassignment7.ui.checkBoxQuestions
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dinesh.quizappassignment7.R
 import com.dinesh.quizappassignment7.data.Quiz
 import com.dinesh.quizappassignment7.databinding.FragmentCheckBoxQuestionBinding
-import com.dinesh.quizappassignment7.ui.UserAnswerViewModel
+import com.dinesh.quizappassignment7.ui.QuizViewModel
 import com.dinesh.quizappassignment7.util.CheckClickInterface
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CheckBoxQuestionFragment : Fragment(R.layout.fragment_check_box_question), CheckClickInterface {
 
     private lateinit var quiz: Quiz
-    private lateinit var viewModel: UserAnswerViewModel
+    private lateinit var viewModel: QuizViewModel
     private lateinit var binding: FragmentCheckBoxQuestionBinding
     private var checkedOptions: ArrayList<Int> = arrayListOf()
 
@@ -35,7 +36,7 @@ class CheckBoxQuestionFragment : Fragment(R.layout.fragment_check_box_question),
 
     private fun initSetup(view: View) {
         binding = FragmentCheckBoxQuestionBinding.bind(view)
-        viewModel = ViewModelProvider(requireActivity())[UserAnswerViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[QuizViewModel::class.java]
 
         binding.questionTextView.text = quiz.question
 
@@ -61,17 +62,15 @@ class CheckBoxQuestionFragment : Fragment(R.layout.fragment_check_box_question),
                 0 -> "a"
                 1 -> "b"
                 2 -> "c"
-                4 -> "d"
+                3 -> "d"
                 else -> ""
             }
         }
 
         //update the answer parameter of quiz object
         quiz.userAnswer = answer
-        if (answer.isNotEmpty()) {
-            viewModel.saveUserAnswer(quiz)
-        }
-
+        viewModel.saveUserAnswer(quiz)
+        Log.v("CheckBoxQuestionFragment", "inserted data : $quiz")
     }
 
     companion object {

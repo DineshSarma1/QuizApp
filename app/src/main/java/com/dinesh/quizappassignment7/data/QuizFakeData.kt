@@ -114,7 +114,7 @@ class QuizFakeData {
                     "Android Fragment is the part of activity; it is also known as sub-activity. There can be more than one fragment in an activity. Fragments represent multiple screens inside one activity.",
                     "d",
                     "",
-                    mutableListOf("View","Manifest","Manifest","Fragment")
+                    mutableListOf("View","Manifest","Gradle","Fragment")
                 ),
                 Quiz(
                     13,
