@@ -1,57 +1,48 @@
 package com.dinesh.quizappassignment7.ui.checkBoxQuestions
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.ViewModelProvider
 import com.dinesh.quizappassignment7.R
 import com.dinesh.quizappassignment7.data.Quiz
-import com.dinesh.quizappassignment7.database.QuizDB
+import com.dinesh.quizappassignment7.databinding.FragmentCheckBoxQuestionBinding
+import com.dinesh.quizappassignment7.ui.UserAnswerViewModel
 import com.dinesh.quizappassignment7.util.CheckClickInterface
 import com.google.gson.Gson
-import kotlinx.coroutines.runBlocking
+import dagger.hilt.android.AndroidEntryPoint
 
-class CheckBoxQuestionFragment : Fragment(R.layout.fragment_check_box_question),
-    CheckClickInterface {
+@AndroidEntryPoint
+class CheckBoxQuestionFragment : Fragment(R.layout.fragment_check_box_question), CheckClickInterface {
 
     private lateinit var quiz: Quiz
+    private lateinit var viewModel: UserAnswerViewModel
+    private lateinit var binding: FragmentCheckBoxQuestionBinding
+    private var checkedOptions: ArrayList<Int> = arrayListOf()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getArgumentsData()
 
+        initSetup(view)
+    }
+
+    private fun getArgumentsData() {
         arguments?.let {
             quiz = Gson().fromJson(it.getString("quiz"), Quiz::class.java)
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initSetup(view)
-    }
-
     private fun initSetup(view: View) {
-        val questionTV = view.findViewById<TextView>(R.id.questionTextView)
-        questionTV.text = quiz.question
+        binding = FragmentCheckBoxQuestionBinding.bind(view)
+        viewModel = ViewModelProvider(requireActivity())[UserAnswerViewModel::class.java]
+
+        binding.questionTextView.text = quiz.question
 
         //initializing recycler view
-        val recyclerView = view.findViewById<RecyclerView>(R.id.optionsRecyclerView)
         val adapter = CBQuestionAdapter(quiz.options, this)
-        recyclerView.adapter = adapter
+        binding.optionsRecyclerView.adapter = adapter
     }
-
-    companion object {
-
-        @JvmStatic
-        fun newInstance(quiz: String) = CheckBoxQuestionFragment().apply {
-            arguments = Bundle().apply {
-                putString("quiz", quiz)
-            }
-        }
-    }
-
-    private var checkedOptions: ArrayList<Int> = arrayListOf()
 
     override fun onCheckBoxChecked(optionsSelected: Int) {
         checkedOptions.add(optionsSelected)
@@ -74,15 +65,22 @@ class CheckBoxQuestionFragment : Fragment(R.layout.fragment_check_box_question),
                 else -> ""
             }
         }
-        val quizDAO = QuizDB(requireContext()).getQuizDAO()
 
         //update the answer parameter of quiz object
         quiz.userAnswer = answer
         if (answer.isNotEmpty()) {
-            runBlocking {
-                quizDAO.insertQuiz(quiz)
+            viewModel.saveUserAnswer(quiz)
+        }
+
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance(quiz: String) = CheckBoxQuestionFragment().apply {
+            arguments = Bundle().apply {
+                putString("quiz", quiz)
             }
         }
     }
-
 }

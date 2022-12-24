@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.dinesh.quizappassignment7.constants.Constant
 import com.dinesh.quizappassignment7.data.QuizDAO
 
-class QuizDB(private val context: Context) {
+class QuizDB(context: Context) {
 
     private var quizDatabase: QuizDatabase = Room.databaseBuilder(
         context,
@@ -13,5 +13,5 @@ class QuizDB(private val context: Context) {
         Constant.DB_NAME
     ).build()
 
-    public fun getQuizDAO(): QuizDAO = quizDatabase.quizDAO
+    fun getQuizDAO(): QuizDAO = quizDatabase.quizDAO
 }

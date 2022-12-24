@@ -6,76 +6,71 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.dinesh.quizappassignment7.R
 import com.dinesh.quizappassignment7.data.Quiz
 import com.dinesh.quizappassignment7.database.QuizDB
+import com.dinesh.quizappassignment7.databinding.FragmentCheckBoxQuestionBinding
+import com.dinesh.quizappassignment7.databinding.FragmentRadioButtonQuestionBinding
+import com.dinesh.quizappassignment7.ui.UserAnswerViewModel
 import com.dinesh.quizappassignment7.util.RadioClickInterface
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 
+@AndroidEntryPoint
 class RadioButtonQuestionFragment : Fragment(R.layout.fragment_radio_button_question), RadioClickInterface {
     private lateinit var quiz: Quiz
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            quiz = Gson().fromJson(it.getString("quiz"), Quiz::class.java)
-        }
-    }
+    private lateinit var viewModel: UserAnswerViewModel
+    private lateinit var binding: FragmentRadioButtonQuestionBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getArgumentsData()
         initSetup(view)
     }
 
     private fun initSetup(view: View) {
-        val questionTV = view.findViewById<TextView>(R.id.questionTextView)
-        questionTV.text = quiz.question
+        binding = FragmentRadioButtonQuestionBinding.bind(view)
+        viewModel = ViewModelProvider(requireActivity())[UserAnswerViewModel::class.java]
+
+        binding.questionTextView.text = quiz.question
 
         //initializing recycler view
-        val recyclerView = view.findViewById<RecyclerView>(R.id.optionsRecyclerView)
         val adapter = RBQuestionAdapter(quiz.options, this)
-        recyclerView.adapter = adapter
+        binding.optionsRecyclerView.adapter = adapter
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance(quiz: String) = RadioButtonQuestionFragment().apply {
-            arguments = Bundle().apply {
-                putString("quiz", quiz)
-            }
+    override fun onPause() {
+        super.onPause()
+        if (quiz.userAnswer!!.isNotEmpty()) {
+            //inserting data to data base
+            viewModel.saveUserAnswer(quiz)
         }
     }
 
     override fun onRadioButtonClicked(optionPosition: Int) {
-        val answer = when(optionPosition) {
+        quiz.userAnswer = when(optionPosition) {
             0 -> "a"
             1 -> "b"
             2 -> "c"
             4 -> "d"
             else -> ""
         }
-
-        //update the answer parameter of quiz object
-        quiz.userAnswer = answer
-
     }
 
-    override fun onPause() {
-        super.onPause()
+    private fun getArgumentsData() {
+        arguments?.let {
+            quiz = Gson().fromJson(it.getString("quiz"), Quiz::class.java)
+        }
+    }
 
-        if (quiz.userAnswer!!.isNotEmpty()) {
-            //inserting data to data base
-            val quizDAO = QuizDB(requireContext()).getQuizDAO()
-            runBlocking {
-                quizDAO.insertQuiz(quiz)
+    companion object {
+        @JvmStatic
+        fun newInstance(quiz: String) = RadioButtonQuestionFragment().apply {
+            arguments = Bundle().apply {
+                putString("quiz", quiz)
             }
         }
     }

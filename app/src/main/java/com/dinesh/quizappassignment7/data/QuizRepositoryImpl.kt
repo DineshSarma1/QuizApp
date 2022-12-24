@@ -1,12 +1,15 @@
 package com.dinesh.quizappassignment7.data
 
+import android.content.Context
+import com.dinesh.quizappassignment7.database.QuizDB
 import com.dinesh.quizappassignment7.database.QuizDatabase
+import javax.inject.Inject
 
-class QuizRepositoryImpl(
+class QuizRepositoryImpl @Inject constructor(
     private val db: QuizDatabase
-) : QuizRepository{
+) : QuizRepository {
 
-    private val quizDao = db.quizDAO
+    private var quizDao: QuizDAO = db.quizDAO
 
     override suspend fun insertQuizQuestions(quizList: MutableList<Quiz>) {
         quizDao.insertQuizQuestions(quizList)
@@ -18,6 +21,10 @@ class QuizRepositoryImpl(
 
     override suspend fun getQuizList(): MutableList<Quiz> {
         return quizDao.getQuizList()
+    }
+
+    override suspend fun resetQuestionSet() {
+        db.clearAllTables()
     }
 
 }

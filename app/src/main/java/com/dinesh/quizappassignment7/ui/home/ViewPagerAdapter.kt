@@ -12,7 +12,7 @@ import com.google.gson.Gson
 
 class ViewPagerAdapter(
     fragment: Fragment,
-    private val questionList: MutableList<Quiz>
+    private val questionList: List<Quiz>
 ) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int = questionList.size + 1

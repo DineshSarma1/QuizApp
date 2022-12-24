@@ -1,5 +1,15 @@
 <resources>
-    <string name="app_name">QuizAppAssignment7</string>
+    <string name="app_name">Android Quiz</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="total_questions">Total Questions : </string>
+    <string name="correct_answers">Correct Answers(Score) : </string>
+    <string name="wrong_answer">Wrong Answer : </string>
+    <string name="your_score">Your Score is : </string>
+
+    <string name="home">Home</string>
+    <string name="next">Next</string>
+    <string name="try_again">Try Again</string>
+    <string name="result_analysis">Result Analysis</string>
 </resources>

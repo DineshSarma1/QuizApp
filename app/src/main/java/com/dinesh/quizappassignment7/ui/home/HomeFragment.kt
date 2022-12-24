@@ -1,20 +1,32 @@
 package com.dinesh.quizappassignment7.ui.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Button
+import android.widget.LinearLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.dinesh.quizappassignment7.R
+import com.dinesh.quizappassignment7.constants.Constant
 import com.dinesh.quizappassignment7.data.Quiz
 import com.dinesh.quizappassignment7.data.QuizFakeData
+import com.dinesh.quizappassignment7.databinding.FragmentHomeBinding
+import com.dinesh.quizappassignment7.ui.SplashActivity
+import com.dinesh.quizappassignment7.ui.result.ResultFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home), OnClickListener{
 
-    private lateinit var viewPager: ViewPager2
     private lateinit var _context: Context
+
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var viewModel: HomeViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -23,29 +35,47 @@ class HomeFragment : Fragment(R.layout.fragment_home), OnClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentHomeBinding.bind(view)
+        viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
 
-        val nextButton = view.findViewById<Button>(R.id.next_button)
-        nextButton.setOnClickListener(this)
-
-        initViewPager(view)
+        initialSetup()
 
     }
 
-    private fun initViewPager(view: View) {
-        viewPager = view.findViewById(R.id.view_pager)
+    private fun initialSetup() {
+        binding.nextButton.setOnClickListener(this)
+        binding.homeButton.setOnClickListener(this)
 
-        val viewPagerAdapter = ViewPagerAdapter(this, QuizFakeData.getQuizQuestions())//get data from data base
-        viewPager.adapter = viewPagerAdapter
-
+        viewModel.data.observe(viewLifecycleOwner) {quizList ->
+            quizList?.let {
+                val viewPagerAdapter = ViewPagerAdapter(this, it)
+                binding.viewPager.adapter = viewPagerAdapter
+            }
+        }
     }
 
     override fun onClick(v: View?) {
         when(v!!.id) {
             R.id.next_button -> {
-                viewPager.setCurrentItem(viewPager.currentItem + 1, true)
+                //Result Fragment
+                if (binding.viewPager.currentItem == 14) {
+                    binding.buttonsLL.visibility = View.GONE
+                    binding.viewPager.isUserInputEnabled = false
+                }
+                binding.viewPager.setCurrentItem(binding.viewPager.currentItem + 1, true)
+            }
+
+            R.id.home_button -> {
+                resetDB()
+                val intent = Intent(activity, SplashActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(intent)
             }
         }
     }
 
+    private fun resetDB() {
+        viewModel.resetDatabase(QuizFakeData.getQuizQuestions())
+    }
 
 }
