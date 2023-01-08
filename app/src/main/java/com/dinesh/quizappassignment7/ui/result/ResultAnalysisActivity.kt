@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.dinesh.quizappassignment7.R
 import com.dinesh.quizappassignment7.databinding.ActivityResultAnalysisBinding
-import com.dinesh.quizappassignment7.ui.QuizViewModel
+import com.dinesh.quizappassignment7.viewModel.QuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

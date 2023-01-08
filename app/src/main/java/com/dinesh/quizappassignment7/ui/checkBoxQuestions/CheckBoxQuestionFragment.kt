@@ -6,9 +6,10 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dinesh.quizappassignment7.R
+import com.dinesh.quizappassignment7.data.AnswerModel
 import com.dinesh.quizappassignment7.data.Quiz
 import com.dinesh.quizappassignment7.databinding.FragmentCheckBoxQuestionBinding
-import com.dinesh.quizappassignment7.ui.QuizViewModel
+import com.dinesh.quizappassignment7.viewModel.QuizViewModel
 import com.dinesh.quizappassignment7.util.CheckClickInterface
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +20,7 @@ class CheckBoxQuestionFragment : Fragment(R.layout.fragment_check_box_question),
     private lateinit var quiz: Quiz
     private lateinit var viewModel: QuizViewModel
     private lateinit var binding: FragmentCheckBoxQuestionBinding
-    private var checkedOptions: ArrayList<Int> = arrayListOf()
+    private var checkedOptions: ArrayList<AnswerModel> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,30 +46,33 @@ class CheckBoxQuestionFragment : Fragment(R.layout.fragment_check_box_question),
         binding.optionsRecyclerView.adapter = adapter
     }
 
-    override fun onCheckBoxChecked(optionsSelected: Int) {
-        checkedOptions.add(optionsSelected)
+    override fun onCheckBoxChecked(answerModel: AnswerModel) {
+        checkedOptions.add(answerModel)
     }
 
-    override fun onCheckBoxUnChecked(optionsSelected: Int) {
-        checkedOptions.remove(optionsSelected)
+    override fun onCheckBoxUnChecked(answerModel: AnswerModel) {
+        checkedOptions.remove(answerModel)
     }
 
     override fun onPause() {
         super.onPause()
         var answer = ""
-        checkedOptions.sort()
-        checkedOptions.forEach { option ->
-            answer += when (option) {
+        var answerDesc = ""
+        checkedOptions.sortedBy { it.option }
+        checkedOptions.forEach { answerModel ->
+            answer += when (answerModel.option) {
                 0 -> "a"
                 1 -> "b"
                 2 -> "c"
                 3 -> "d"
                 else -> ""
             }
+            answerDesc += answerModel.description+"\n"
         }
 
         //update the answer parameter of quiz object
         quiz.userAnswer = answer
+        quiz.userAnswerDesc = answerDesc
         viewModel.saveUserAnswer(quiz)
         Log.v("CheckBoxQuestionFragment", "inserted data : $quiz")
     }

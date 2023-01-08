@@ -37,7 +37,7 @@ class RBQuestionAdapter(
         holder.optionRB.setOnClickListener {
             selectedPosition=  position
             notifyDataSetChanged()
-            listener.onRadioButtonClicked(position)
+            listener.onRadioButtonClicked(position, holder.optionRB.text.toString())
         }
     }
 

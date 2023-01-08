@@ -10,9 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.dinesh.quizappassignment7.R
 import com.dinesh.quizappassignment7.data.QuizFakeData
 import com.dinesh.quizappassignment7.databinding.FragmentResultBinding
-import com.dinesh.quizappassignment7.ui.AnswerViewModel
+import com.dinesh.quizappassignment7.viewModel.AnswerViewModel
 import com.dinesh.quizappassignment7.ui.SplashActivity
-import com.dinesh.quizappassignment7.ui.QuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -14,6 +14,8 @@ class QuizFakeData {
                     IS_RADIO_BUTTON,
                     "Android is a software package and linux based operating system for mobile devices such as tablet computers and smartphones.",
                     "a",
+                    "an operating system",
+                    "",
                     "",
                     mutableListOf("an operating system","a web browser", "a web server", "None of the above")
                 ),
@@ -23,6 +25,8 @@ class QuizFakeData {
                     IS_RADIO_BUTTON,
                     "The Android platform was released under the Apache 2.0 license, and it is responsible for the copyright of the Android Open Source project.",
                     "c",
+                    "Apache/MIT",
+                    "",
                     "",
                     mutableListOf("OSS","Sourceforge","Apache/MIT","None of the above")
                 ),
@@ -32,6 +36,8 @@ class QuizFakeData {
                     IS_RADIO_BUTTON,
                     "Android is a software package and a Linux-based operating system specially designed for touch-screen mobile devices like smartphones and tablets.",
                     "d",
+                    "Mobile devices",
+                    "",
                     "",
                     mutableListOf("Servers","Desktops","Laptops","Mobile devices")
                 ),
@@ -41,6 +47,8 @@ class QuizFakeData {
                     IS_RADIO_BUTTON,
                     "The Dalvik Virtual Machine (DVM) is an android virtual machine optimized for mobile devices. It optimizes the virtual machine for memory, battery life, and performance.",
                     "b",
+                    "Dalvik virtual machine",
+                    "",
                     "",
                     mutableListOf("JVM","Dalvik virtual machine","Simple virtual machine","None of the above")
                 ),
@@ -50,6 +58,8 @@ class QuizFakeData {
                     IS_RADIO_BUTTON,
                     "Java language is mainly used to write the android code even though other languages can be used.",
                     "a",
+                    "Java",
+                    "",
                     "",
                     mutableListOf("Java","C++","Python","C")
                 ),
@@ -59,6 +69,8 @@ class QuizFakeData {
                     IS_RADIO_BUTTON,
                     "An APK is a short form of the Android Package Kit. An APK file is the file format used to install the applications on the android operating system.",
                     "c",
+                    "Android Package Kit",
+                    "",
                     "",
                     mutableListOf("Android Phone Kit","Android Page Kit","Android Package Kit")
                 ),
@@ -68,6 +80,8 @@ class QuizFakeData {
                     IS_RADIO_BUTTON,
                     "API stands for application program interface. It is a set of routines, protocols, and tools for building software and applications.",
                     "a",
+                    "Application Programming Interface",
+                    "",
                     "",
                     mutableListOf("Application Programming Interface","Android Programming Interface","Android Page Interface", "Application Page Interface")
                 ),
@@ -77,6 +91,8 @@ class QuizFakeData {
                     IS_CHECK_BOX,
                     "The finish() method is used to close the activity. Whereas the finishActivity(int requestCode) also closes the activity with requestCode.",
                     "ab",
+                    "Using finish() method\nUsing finishActivity(int requestCode)",
+                    "",
                     "",
                     mutableListOf("Using finish() method","Using finishActivity(int requestCode)","Neither (a) nor (b)")
                 ),
@@ -86,6 +102,8 @@ class QuizFakeData {
                     IS_CHECK_BOX,
                     "We can use the Android emulator, physical android phone, or third-party emulator as a target device to execute and test our Android application.",
                     "abc",
+                    "Third-party emulators\nEmulator included in Android SDK\nPhysical android phone",
+                    "",
                     "",
                     mutableListOf("Third-party emulators","Emulator included in Android SDK","Physical android phone")
                 ),
@@ -95,6 +113,8 @@ class QuizFakeData {
                     IS_RADIO_BUTTON,
                     "onBackPressed() method is not an activity lifecycle callback method",
                     "d",
+                    "onBackPressed() method",
+                    "",
                     "",
                     mutableListOf("onClick() method","onCreate() method","onStart() method","onBackPressed() method")
                 ),
@@ -104,6 +124,8 @@ class QuizFakeData {
                     IS_CHECK_BOX,
                     "All of the above are Dialog classes",
                     "abc",
+                    "AlertDialog\nDatePicker Dialog\nProgressDialog",
+                    "",
                     "",
                     mutableListOf("AlertDialog","DatePicker Dialog","ProgressDialog")
                 ),
@@ -113,6 +135,8 @@ class QuizFakeData {
                     IS_RADIO_BUTTON,
                     "Android Fragment is the part of activity; it is also known as sub-activity. There can be more than one fragment in an activity. Fragments represent multiple screens inside one activity.",
                     "d",
+                    "Fragment",
+                    "",
                     "",
                     mutableListOf("View","Manifest","Gradle","Fragment")
                 ),
@@ -122,6 +146,8 @@ class QuizFakeData {
                     IS_RADIO_BUTTON,
                     "The android Activity is the subclass of ContextThemeWrapper class. Android Activity Lifecycle is controlled by 7 methods of android.app.Activity class. An activity is a single screen in android. It is like a window or frame of Java.",
                     "c",
+                    "contextThemeWrapper",
+                    "",
                     "",
                     mutableListOf("context","object","contextThemeWrapper","None of the above")
                 ),
@@ -131,6 +157,8 @@ class QuizFakeData {
                     IS_CHECK_BOX,
                     "Android 4.1(Jelly Bean) updates to following features: smoother user interface, enhance accessibility, expandable notification, fixed bug on Nexus 7, one-finger gestures to expand/collapse notifications, lock screen improvement, multiple user accounts (tablets only), new clock application, Bluetooth low energy support, volume for incoming call, 4K resolution support, native emoji support, bug fixes for the Nexus 7 LTE.",
                     "abc",
+                    "User Interface\nLock screen improvement\nNew clock application",
+                    "",
                     "",
                     mutableListOf("User Interface","Lock screen improvement","New clock application")
                 ),
@@ -140,6 +168,8 @@ class QuizFakeData {
                     IS_RADIO_BUTTON,
                     "The onDestroy() method can be used by services to clean up any resources like receivers, threads, registered listeners, etc.",
                     "c",
+                    "onDestroy() method",
+                    "",
                     "",
                     mutableListOf("onStop() method","stopService() method","onDestroy() method","stopSelf() method")
                 )

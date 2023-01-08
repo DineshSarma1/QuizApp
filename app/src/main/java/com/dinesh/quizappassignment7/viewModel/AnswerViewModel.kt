@@ -1,4 +1,4 @@
-package com.dinesh.quizappassignment7.ui
+package com.dinesh.quizappassignment7.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

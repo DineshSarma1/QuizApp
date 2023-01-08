@@ -7,6 +7,7 @@ import android.widget.CheckBox
 import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.dinesh.quizappassignment7.R
+import com.dinesh.quizappassignment7.data.AnswerModel
 import com.dinesh.quizappassignment7.util.CheckClickInterface
 
 class CBQuestionAdapter(
@@ -30,9 +31,9 @@ class CBQuestionAdapter(
         holder.bind(options[position])
         holder.optionCB.setOnClickListener {
             if (holder.optionCB.isChecked) {
-                listener.onCheckBoxChecked(position)
+                listener.onCheckBoxChecked(AnswerModel(position,holder.optionCB.text.toString()))
             }else {
-                listener.onCheckBoxUnChecked(position)
+                listener.onCheckBoxUnChecked(AnswerModel(position,holder.optionCB.text.toString()))
             }
         }
     }

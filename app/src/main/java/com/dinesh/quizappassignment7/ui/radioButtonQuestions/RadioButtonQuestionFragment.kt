@@ -1,14 +1,13 @@
 package com.dinesh.quizappassignment7.ui.radioButtonQuestions
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dinesh.quizappassignment7.R
 import com.dinesh.quizappassignment7.data.Quiz
 import com.dinesh.quizappassignment7.databinding.FragmentRadioButtonQuestionBinding
-import com.dinesh.quizappassignment7.ui.QuizViewModel
+import com.dinesh.quizappassignment7.viewModel.QuizViewModel
 import com.dinesh.quizappassignment7.util.RadioClickInterface
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +35,7 @@ class RadioButtonQuestionFragment : Fragment(R.layout.fragment_radio_button_ques
         binding.optionsRecyclerView.adapter = adapter
     }
 
-    override fun onRadioButtonClicked(optionPosition: Int) {
+    override fun onRadioButtonClicked(optionPosition: Int, userAnswerDesc: String) {
         quiz.userAnswer = when(optionPosition) {
             0 -> "a"
             1 -> "b"
@@ -44,6 +43,7 @@ class RadioButtonQuestionFragment : Fragment(R.layout.fragment_radio_button_ques
             3 -> "d"
             else -> ""
         }
+        quiz.userAnswerDesc = userAnswerDesc
         viewModel.saveUserAnswer(quiz)
     }
 

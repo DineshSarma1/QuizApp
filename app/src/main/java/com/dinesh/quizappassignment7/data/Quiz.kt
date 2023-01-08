@@ -10,7 +10,9 @@ data class Quiz(
     val questionType: String,
     val answerExplanation: String,
     val answer: String,
+    val answerDesc: String,
     var userAnswer: String? = null,
+    var userAnswerDesc: String? = null,
     var options: MutableList<String>
 )
 

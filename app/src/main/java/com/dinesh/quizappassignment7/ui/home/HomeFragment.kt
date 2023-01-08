@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dinesh.quizappassignment7.R
 import com.dinesh.quizappassignment7.data.QuizFakeData
 import com.dinesh.quizappassignment7.databinding.FragmentHomeBinding
-import com.dinesh.quizappassignment7.ui.QuizViewModel
+import com.dinesh.quizappassignment7.viewModel.QuizViewModel
 import com.dinesh.quizappassignment7.ui.SplashActivity
 import dagger.hilt.android.AndroidEntryPoint
 

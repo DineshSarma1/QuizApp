@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="quiz"
             type="com.dinesh.quizappassignment7.data.Quiz" />
@@ -43,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="@{quiz.userAnswer}"
+                android:text="@{quiz.userAnswerDesc}"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -63,13 +62,13 @@
                 android:text="Correct Answer : "
                 android:textColor="@color/dark_gray"
                 android:textSize="18sp"
-                tools:text="Question" />
+                tools:text="Correct Answer : " />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="5dp"
-                android:text="@{quiz.answer}"
+                android:text="@{quiz.answerDesc}"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
