@@ -13,4 +13,8 @@
     <string name="try_again">Try Again</string>
     <string name="result_analysis">Result Analysis</string>
     <string name="result">Result</string>
+    <string name="quiz">Quiz</string>
+    <string name="get_started">Get Started</string>
+    <string name="waiting_text">Your quiz is prepared for you.</string>
+    <string name="good_luck">Good Luck!</string>
 </resources>
